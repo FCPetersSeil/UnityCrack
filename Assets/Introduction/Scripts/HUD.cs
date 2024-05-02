@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class HUD : MonoBehaviour
@@ -21,6 +22,7 @@ public class HUD : MonoBehaviour
     void Update()
     {
         scoreText.text = "Score: " + score;
-        
+        healthText.text = "Health: " + Mathf.Round(Wizard.Instance.Stats.health) + "/" + Wizard.Instance.Stats.MaxHealth;
+        manaText.text = "Mana: " + Mathf.Round(Wizard.Instance.Stats.mana) + "/" + Wizard.Instance.Stats.MaxMana;
     }
 }

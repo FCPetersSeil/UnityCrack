@@ -2,19 +2,18 @@ using UnityEngine;
 
 public class Wizard : MonoBehaviour
 {
-    public GameObject fireballPrefab;
-    public float speed = 2.0f; 
-    private float fireRate = 3.0f; 
+    public static Wizard Instance; // Singletone variable
+    public GameObject fireballPrefab; 
     private float lastFireTime = 0; 
     private Vector3 lastMovement;
     private Animator animator;
-
-    public int health = 100;
-    public int mana = 100;
+    public Playerstats Stats;
     
     void Start()
     {
-        lastFireTime = -fireRate; 
+        Stats  = new Playerstats();
+        Instance = this; // Singleton instance erzeugen auf diesem Objekt.
+        lastFireTime = -Stats.fireRate; 
         animator = GetComponent<Animator>();
     }
     void Update()
@@ -50,16 +49,22 @@ public class Wizard : MonoBehaviour
             animator.SetBool("Walking", false);
         }
  
-        transform.position += movement * speed * Time.deltaTime;
+        transform.position += movement * Stats.movementspeed * Time.deltaTime;
  
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastFireTime >= fireRate)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastFireTime >= Stats.fireRate)
         {
             
             GameObject obj = Instantiate(fireballPrefab, transform.position, Quaternion.identity);
             obj.GetComponent<Feuerball>().direction = lastMovement;
             lastFireTime = Time.time; 
             animator.SetBool("Attacking", true);
-            mana -= 10;
+            Stats.mana -= 10;
+        }
+        if(Stats.mana < Stats.MaxMana)
+        {
+            Stats.mana += Stats.manaRegen;
+        } else {
+            Stats.mana = Stats.MaxMana;
         }
 
     }
