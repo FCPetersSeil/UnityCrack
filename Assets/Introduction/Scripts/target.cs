@@ -7,8 +7,10 @@ public class target : MonoBehaviour
 {
     public GameObject targetPrefab;
     
+    
     void Start()
     {
+        
         //Destroy(gameObject, 8);
     }
 
@@ -28,6 +30,9 @@ public class target : MonoBehaviour
             Instantiate(targetPrefab, new Vector3(x,y, 0f), Quaternion.identity);
             Destroy(gameObject);
             HUD.score += 1;
+            Wizard.Instance.Stats.GainXP(1);
         }
     }
+
+    
 }
