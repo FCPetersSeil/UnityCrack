@@ -51,7 +51,7 @@ public class Wizard : MonoBehaviour
  
         transform.position += movement * Stats.movementspeed * Time.deltaTime;
  
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastFireTime >= Stats.fireRate)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastFireTime >= Stats.fireRate && Stats.mana >= 10)
         {
             
             GameObject obj = Instantiate(fireballPrefab, transform.position, Quaternion.identity);
@@ -65,6 +65,12 @@ public class Wizard : MonoBehaviour
             Stats.mana += Stats.manaRegen;
         } else {
             Stats.mana = Stats.MaxMana;
+        }
+        if(Stats.health < Stats.MaxHealth)
+        {
+            Stats.health += Stats.healthRegen;
+        } else {
+            Stats.health = Stats.MaxHealth;
         }
 
     }

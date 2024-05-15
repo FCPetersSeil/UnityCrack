@@ -8,32 +8,54 @@ public class Playerstats
 
     public int MaxHealth = 100;
     public float MaxMana = 100f;
-    public int health = 100;
+    public float health = 100f;
     public float mana = 100f; 
     public float healthRegen = Time.deltaTime * 0.1f;
     public float manaRegen = Time.deltaTime * 0.3f;
     public float fireballDamage = 10f;
+    public float needForLevel = 100f;
 
-    public int targetDestroyed = 0;
-
-    public int erfahrungspunkt = 0;
+    public float erfahrungspunkt = 0f;
     public int level = 1;
+    public int skillPoints = 0; 
+    
 
     public void LevelUp()
     {
         level++;
-        fireRate -= 0.05f;
-        MaxHealth += 10;
-        MaxMana += 10f;
+        skillPoints++;
+        SkillPointUse();
     }    
-    
-    public void GainXP(int xp)
+
+    public void SkillPointUse()
     {
-        targetDestroyed += xp;
-        erfahrungspunkt++;
-        if (targetDestroyed == 10){
+    
+        switch ((int)Random.value*4)
+        {
+            case 0:
+            movementspeed += 0.05f; 
+            break;
+            case 1:
+            fireRate -= 0.005f;
+            break;
+            case 2:
+            MaxHealth += 10;
+            healthRegen += Time.deltaTime * 0.01f;
+            break;
+            case 3:
+            MaxMana += 5;
+            manaRegen += Time.deltaTime * 0.05f;
+            break;
+        }
+    }
+    
+    public void GainXP()
+    {
+        erfahrungspunkt += 20;
+        if (erfahrungspunkt == needForLevel){
             LevelUp();
-            targetDestroyed = 0;            
+            erfahrungspunkt = 0;
+            needForLevel += 100;            
         }
     } 
 
