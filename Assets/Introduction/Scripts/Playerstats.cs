@@ -1,4 +1,3 @@
-using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
 public class Playerstats
@@ -19,7 +18,6 @@ public class Playerstats
     public int level = 1;
     public int skillPoints = 0; 
     
-
     public void LevelUp()
     {
         level++;
@@ -29,35 +27,38 @@ public class Playerstats
 
     public void SkillPointUse()
     {
-    
-        switch ((int)Random.value*4)
+        switch ((int)(Random.value*4))
         {
-            case 0:
-            movementspeed += 0.05f; 
+            case 0:        
+            if(fireRate > 0.1f)
+            {    
+                fireRate -= 0.005f;
+            } else
+            {
+                fireRate += 0;
+            }
             break;
             case 1:
-            fireRate -= 0.005f;
-            break;
-            case 2:
             MaxHealth += 10;
             healthRegen += Time.deltaTime * 0.01f;
             break;
-            case 3:
+            case 2:            
             MaxMana += 5;
-            manaRegen += Time.deltaTime * 0.05f;
+            manaRegen += Time.deltaTime * 0.05f; 
+            break;
+            case 3:
+            movementspeed += 0.05f;
             break;
         }
     }
     
-    public void GainXP()
+    public void GainXP(float xp)
     {
-        erfahrungspunkt += 20;
-        if (erfahrungspunkt == needForLevel){
+        erfahrungspunkt += xp;
+        if (erfahrungspunkt >= needForLevel){
             LevelUp();
             erfahrungspunkt = 0;
             needForLevel += 100;            
         }
     } 
-
-    
 }

@@ -74,7 +74,8 @@ public class Wizard : MonoBehaviour
         }
 
     }
-    public void stopAttacking(){
+    public void stopAttacking()
+    {
         animator.SetBool("Attacking", false);
     }
 }

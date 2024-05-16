@@ -17,39 +17,43 @@ public class HUD : MonoBehaviour
     public static int score = 0;
     public string namePlayer = "";
     
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         Wizard w = Wizard.Instance;
         Playerstats s = w.Stats;
         float MaxMana = s.MaxMana;
         int MaxHealth = s.MaxHealth;
+        float mana = s.mana;
+        float health = s.health;
+        int level = s.level;
+        int skillPointer = s.skillPoints;
+        float exp = s.erfahrungspunkt;
+        float nFL = s.needForLevel;
 
-        levelanzeige.text = "Level: " + Wizard.Instance.Stats.level;
+        levelanzeige.text = "Level: " + level;
         erfahrungspunkte.text = "Erfahrungspunkte:";
         playername.text = "Name: " + namePlayer;
         scoreText.text = "Score: " + score;
-        healthText.text = "Health: " + Mathf.Round(Wizard.Instance.Stats.health) + "/" + MaxHealth;
-        manaText.text = "Mana: " + Mathf.Round(Wizard.Instance.Stats.mana) + "/" + MaxMana;
-        if(Wizard.Instance.Stats.skillPoints > 0){
-            skillPoint.text = "Skill Punkte: " + Wizard.Instance.Stats.skillPoints;
+        healthText.text = "Health: " + Mathf.Round(health) + "/" + MaxHealth;
+        manaText.text = "Mana: " + Mathf.Round(mana) + "/" + MaxMana;
+        if(skillPointer > 0){
+            skillPoint.text = "Skill Punkte: " + skillPointer;
         } else {
             skillPoint.text = "";
         }
         
-        float manaPercantage = Wizard.Instance.Stats.mana / MaxMana;
+        float manaPercantage = mana / MaxMana;
         manaImage.transform.localScale = new Vector3(manaPercantage, 1,1 );
 
-        float healthPercantage = Wizard.Instance.Stats.health / MaxHealth;
+        float healthPercantage = health / MaxHealth;
         healthImage.transform.localScale = new Vector3(healthPercantage, 1,1 );
 
-        float expPercantage = Wizard.Instance.Stats.erfahrungspunkt / Wizard.Instance.Stats.needForLevel;
+        float expPercantage = exp / nFL;
         expImage.transform.localScale = new Vector3(expPercantage, 1,1 );
 
     }

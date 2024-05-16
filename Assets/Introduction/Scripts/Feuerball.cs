@@ -33,6 +33,5 @@ public class Feuerball : MonoBehaviour
             return;
         }
         Destroy(gameObject);
-
     }
 }
