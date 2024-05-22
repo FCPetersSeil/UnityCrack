@@ -13,6 +13,7 @@ public class target : MonoBehaviour
     
     void Start()
     {
+        statsM = new Minionstats();
         targetTime = 0;   
     }
 
