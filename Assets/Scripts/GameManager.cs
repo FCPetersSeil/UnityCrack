@@ -20,14 +20,13 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        
+        else
+        {
+            Destroy(gameObject);
+        }
         
     }
-    public static void GoToGame()
-    {
-        SceneManager.LoadScene("Game");
-        instance.state = GameStates.inGame;
-    }
+    
 
     void Update()
     {
@@ -42,6 +41,15 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        Input.GetKeyDown(KeyCode.Escape);
+        //gameObject.activeSelf
+
     }
+    public static void GoToGame()
+    {
+        SceneManager.LoadScene("Game");
+        instance.state = GameStates.inGame;
+    }
+
 
 }
