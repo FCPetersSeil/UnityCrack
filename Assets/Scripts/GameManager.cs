@@ -11,16 +11,37 @@ public class GameManager : MonoBehaviour
     public GameStates state = GameStates.inTitel;    
 
     public static GameManager instance;
+    public float GameTimer = 180;
 
     void Start()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        
+        
     }
-    public void GoToGame()
+    public static void GoToGame()
     {
         SceneManager.LoadScene("Game");
-        state = GameStates.inGame;
+        instance.state = GameStates.inGame;
     }
 
+    void Update()
+    {
+        if(state == GameStates.inGame)
+        {
+            GameTimer -= Time.deltaTime;
+            if(GameTimer <= 0)
+            {
+                SceneManager.LoadScene("Titel");
+                state = GameStates.inTitel; 
+                GameTimer = 180;
+            }
+        }
+
+    }
 
 }
