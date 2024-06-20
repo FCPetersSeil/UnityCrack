@@ -30,4 +30,10 @@ public class Titel : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void GoToHub()
+    {
+        GameManager.GoToHub();
+    }
+
 }

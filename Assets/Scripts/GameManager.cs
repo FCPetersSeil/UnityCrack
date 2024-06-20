@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
 {
 
 
-    public enum GameStates {inTitel, inGame, paused};
+    public enum GameStates {inTitel, inGame, paused, hub};
     public GameStates state = GameStates.inTitel;    
 
     public static GameManager instance;
-    public float GameTimer = 180;
+    public float GameTimer = 60;
+
+    public Pause pauseMenu;
 
     void Start()
     {
@@ -35,20 +37,36 @@ public class GameManager : MonoBehaviour
             GameTimer -= Time.deltaTime;
             if(GameTimer <= 0)
             {
-                SceneManager.LoadScene("Titel");
-                state = GameStates.inTitel; 
-                GameTimer = 180;
+                GoToTitel(); 
+                GameTimer = 60;
+            }
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                pauseMenu.ToggelActive();
             }
         }
-
-        Input.GetKeyDown(KeyCode.Escape);
-        //gameObject.activeSelf
+        if(state == GameStates.inTitel)
+        {
+            GameTimer = 60;
+        }
 
     }
     public static void GoToGame()
     {
         SceneManager.LoadScene("Game");
         instance.state = GameStates.inGame;
+    }
+
+    public static void GoToTitel()
+    {
+        SceneManager.LoadScene("Titel");
+        instance.state = GameStates.inTitel;
+    }
+
+    public static void GoToHub()
+    {
+        SceneManager.LoadScene("Hub");
+        instance.state = GameStates.hub;
     }
 
 

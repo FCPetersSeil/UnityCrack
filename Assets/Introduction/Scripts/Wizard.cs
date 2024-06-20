@@ -22,6 +22,11 @@ public class Wizard : MonoBehaviour
     }
     void Update()
     {
+        if(GameManager.instance.state == GameManager.GameStates.paused) // Erzeugt, dass Freezen des Bildschirms für das Pausieren
+        {
+            return;
+        }
+
         Vector3 movement = Vector3.zero;
  
         if (Input.GetKey(KeyCode.W))

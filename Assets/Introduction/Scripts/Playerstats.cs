@@ -10,7 +10,7 @@ public class Playerstats
     public float health = 100f;
     public float mana = 100f; 
     public float healthRegen = Time.deltaTime * 0.1f;
-    public float manaRegen = Time.deltaTime * 0.3f;
+    public float manaRegen = Time.deltaTime * 0.5f;
     public float fireballDamage = 10f;
     public float needForLevel = 100f;
 
